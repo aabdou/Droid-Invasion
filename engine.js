@@ -71,7 +71,7 @@ var Game = new function() {
     };
     
     // Set an active board
-    this.setBoard = function(board, num) {
+    this.setBoard = function(num, board) {
         boards[num] = board;
     }
 };
