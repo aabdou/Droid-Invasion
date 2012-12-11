@@ -44,7 +44,7 @@ var Game = new function() {
                 Game.keys[keyCodes[e.keyCode]] = true;
                 e.preventDefault();
             }
-        });
+        }, false);
         
         // Keyup turns the stats off
         window.addEventListener('keyup', function(e) {
@@ -52,7 +52,7 @@ var Game = new function() {
                 Game.keys[keyCodes[e.keyCode]] = false;
                 e.preventDefault();
             }
-        });
+        }, false);
     };
     
     // Start the game loop
@@ -98,4 +98,25 @@ var SpriteSheet = new function() {
         y,
         s.w, s.h);
     };
+}
+
+// Title screen
+var TitleScreen = function(title, subTitle, callback) {
+    this.step = function(dt) {
+        if (Game.keys['fire'] && callback) 
+            callback();
+    }
+    
+    this.draw = function(ctx) {
+        ctx.fillStyle = "#FFFFFF";
+        ctx.textAlign = "center";
+        
+        // Draw the title
+        ctx.font = "bold bangers 40px";
+        ctx.fillText(title, Game.width/2, Game.height/2);
+        
+        // Draw the title
+        ctx.font = "bold bangers 20px";
+        ctx.fillText(subTitle, Game.width/2, 40 + Game.height/2);
+    }
 }
