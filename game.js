@@ -3,7 +3,8 @@ var sprites = {
 };    
 
 var playGame = function() {
-    Game.setBoard(3, new TitleScreen("Alien Invasion", "Game started..."));
+    //Game.setBoard(3, new TitleScreen("Alien Invasion", "Game started..."));
+    Game.setBoard(3, new PlayerShip());
 }
 
 var startGame = function () {
@@ -71,4 +72,38 @@ var Starfield = function(speed,  opacity, numOfStars, clear) {
         offset += dt * speed;
         offse = offset % stars.height;
     }
+}
+
+var PlayerShip = function() {
+    this.w = SpriteSheet.map['ship'].w;
+    this.h = SpriteSheet.map['ship'].h;
+    this.x = Game.width/2 - this.w/2;
+    this.y = Game.height - 10 - this.h;
+    this.vx = 0;
+    this.maxVel = 200;
+    
+    this.step = function(dt) {
+        // the direction
+        if(Game.keys['left']) {
+            this.vx = -this.maxVel;       
+        } else if(Game.keys['right']) {
+            this.vx = this.maxVel;
+        } else {
+            this.vx = 0;
+        }
+        
+        // Update the x position
+        this.x += dt * this.vx;
+        
+        // Make sure that we are still within boundaries
+        if (this.x < 0)
+            this.x = 0;
+        else if (this.x > Game.width - this.w)
+            this.x = Game.width - this.w;
+    }
+    
+    this.draw = function(ctx) {
+        SpriteSheet.draw(ctx, 'ship', this.x, this.y, 1);
+    }
+    
 }
