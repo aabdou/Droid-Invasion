@@ -2,22 +2,22 @@ var sprites = {
     ship: { sx: 0, sy: 0, w: 18, h: 35, frames: 3 }
 };    
 
+var playGame = function() {
+    Game.setBoard(3, new TitleScreen("Alien Invasion", "Game started..."));
+}
+
 var startGame = function () {
     //SpriteSheet.draw(Game.ctx,"ship",100,100,1);
     
     Game.setBoard(0,new Starfield(20,0.4,100,true))
     Game.setBoard(1,new Starfield(50,0.6,100))
     Game.setBoard(2,new Starfield(100,1.0,50));        
-    Game.setBoard(3,new TitleScreen("Alien Invasion", "Hit tab to start!"), playGame);
+    Game.setBoard(3,new TitleScreen("Alien Invasion", "Hit tab to start!", playGame));
 }
 
 window.addEventListener('load', function() {
     Game.initialize("game", sprites, startGame);
 });
-
-var playGame = function() {
-    Game.setBoard(3, new TitleScreen("Alien Invasion", "Game started..."));
-}
 
 // Star field
 var Starfield = function(speed,  opacity, numOfStars, clear) {

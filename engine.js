@@ -3,8 +3,8 @@ var Game = new function() {
     // Key codes
     var keyCodes = {
         37: 'left',
-        38: 'right',
-        39: 'fire'
+        39: 'right',
+        32: 'fire'
     };
     
     // Game boards
